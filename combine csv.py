@@ -1,7 +1,7 @@
 from os import walk
 import csv
 
-mypath =r"C:\DIRECTORY\CONTAINING\CSV\FILES"
+mypath =r"C:\Users\Owner\Desktop\csv"
 outfile= mypath+"\\"+r"output.csv"
 
 files = []
@@ -13,10 +13,11 @@ for (dirpath, dirnames, filenames) in walk(mypath):
 if "output.csv" in files:
     files.remove("output.csv")
 
+#files.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 
 headerdone = False
 
-fieldnames = []
+fieldnames = set()
 
 
 print("Geting Field names")
@@ -26,10 +27,8 @@ for file in files:
     print(infile)
     with open(infile, 'r') as csvfile:
         reader = csv.DictReader(csvfile)
-        currentfields = reader.fieldnames
-        for currentfield in currentfields:
-            if currentfield not in fieldnames:
-                fieldnames.append(currentfield)
+        fieldnames.update(reader.fieldnames)
+        
 
 print("Writing file")
 with open(outfile, 'w', newline='') as outcsvfile:    
@@ -43,9 +42,3 @@ with open(outfile, 'w', newline='') as outcsvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 writer.writerow(row)
-
-
-        
-                
-
-
