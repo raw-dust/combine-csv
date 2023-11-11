@@ -1,7 +1,7 @@
 from os import walk
 import csv
 
-mypath =r"C:\Users\Owner\Desktop\csv"
+mypath =r"C:\DIRECTORY\CONTAINING\CSV\FILES"
 outfile= mypath+"\\"+r"output.csv"
 
 files = []
